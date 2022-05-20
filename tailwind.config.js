@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        openSans: ["Open Sans"],
+        nunito: ["Nunito"],
       },
     },
   },

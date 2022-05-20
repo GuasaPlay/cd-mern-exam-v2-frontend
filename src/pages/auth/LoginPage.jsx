@@ -2,12 +2,15 @@ import { Button } from "components/ui/Button";
 import { Input } from "components/ui/Input";
 import { Label } from "components/ui/Label";
 import { ErrorMessage, Field, Form, Formik } from "formik";
+import { useToast } from "hooks/useToast";
 import { Link } from "react-router-dom";
 import { FormSchemaLogin, initialValuesLogin } from "schemas/login";
 
 export const LoginPage = () => {
+  const { showToast } = useToast();
   const handleSubmit = (values) => {
     console.log(values);
+    showToast("Login Successful", "success");
   };
 
   return (

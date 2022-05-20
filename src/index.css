@@ -1,13 +1,18 @@
+@import "react-toastify/dist/ReactToastify.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap");
-
 html {
   font-family: "Nunito", sans-serif;
 }
 
 body {
   @apply bg-neutral-200;
+}
+
+.custom-toast-body {
+  @apply font-nunito text-sm;
 }

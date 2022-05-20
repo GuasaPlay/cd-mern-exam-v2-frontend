@@ -2,12 +2,26 @@ import { Button } from "components/ui/Button";
 import { Input } from "components/ui/Input";
 import { Label } from "components/ui/Label";
 import { ErrorMessage, Field, Form, Formik } from "formik";
+import { useToast } from "hooks/useToast";
+import { useRegisterUser } from "hooks/useUser";
 import { Link } from "react-router-dom";
 import { FormSchemaRegister, initialValuesRegister } from "schemas/register";
 
 export const RegisterPage = () => {
+  const { showToast } = useToast();
+  const { mutate } = useRegisterUser();
   const handleSubmit = (values) => {
-    console.log(values);
+    const user = {
+      name: values.name,
+      email: values.email,
+      password: values.password,
+    };
+
+    mutate(user, {
+      onError: (error) => {
+        showToast(error.response.data.msg, "error");
+      },
+    });
   };
 
   return (
