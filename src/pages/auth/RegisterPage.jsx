@@ -47,7 +47,6 @@ export const RegisterPage = () => {
                   id="email"
                   name="email"
                   required
-                  autoFocus
                   placeholder="Ej. john@gmail.com"
                   component={Input}
                 />
@@ -64,7 +63,6 @@ export const RegisterPage = () => {
                   id="password"
                   name="password"
                   required
-                  autoFocus
                   placeholder="Ej. *******"
                   component={Input}
                 />
@@ -85,7 +83,6 @@ export const RegisterPage = () => {
                   id="confirmPassword"
                   name="confirmPassword"
                   required
-                  autoFocus
                   placeholder="Ej. *******"
                   component={Input}
                 />

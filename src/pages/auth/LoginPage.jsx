@@ -47,7 +47,6 @@ export const LoginPage = () => {
                   id="password"
                   name="password"
                   required
-                  autoFocus
                   placeholder="Ej. *******"
                   component={Input}
                 />
