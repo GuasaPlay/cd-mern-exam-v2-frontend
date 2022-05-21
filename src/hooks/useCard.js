@@ -7,6 +7,8 @@ import {
 
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
+import sortArray from "sort-array";
+
 const key = "cards";
 
 export const useCreteCard = () => {
@@ -26,11 +28,19 @@ export const useUpdateCardStatus = () => {
       );
 
       queryClient.setQueriesData([key], (oldCards) => [
-        ...oldCards.filter((card) => card._id !== updatedCard.cardId),
-        {
-          ...cardFound,
-          status: updatedCard.status,
-        },
+        ...sortArray(
+          [
+            ...oldCards.filter((card) => card._id !== updatedCard.cardId),
+            {
+              ...cardFound,
+              status: updatedCard.status,
+            },
+          ],
+          {
+            by: "due",
+            order: "asc",
+          }
+        ),
       ]);
       return { previousCards };
     },
@@ -57,6 +67,7 @@ export const useDeleteCard = () => {
       queryClient.setQueriesData([key], (oldCards) => [
         ...oldCards.filter((card) => card._id !== deletedCard.cardId),
       ]);
+
       return { previousCards };
     },
 

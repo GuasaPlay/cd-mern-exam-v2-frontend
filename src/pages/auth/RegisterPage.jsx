@@ -13,7 +13,7 @@ export const RegisterPage = ({ setLoggedIn }) => {
   const { mutate, isLoading } = useRegisterUser();
   const handleSubmit = (values) => {
     const user = {
-      name: values.name,
+      username: values.username,
       email: values.email,
       password: values.password,
     };
@@ -44,11 +44,11 @@ export const RegisterPage = ({ setLoggedIn }) => {
           <Form className="mt-3 space-y-6">
             <div className="grid grid-cols-1 gap-6">
               <div>
-                <Label htmlFor="name" name="Name" isRequired />
+                <Label htmlFor="username" name="Username" isRequired />
                 <Field
                   type="text"
-                  id="name"
-                  name="name"
+                  id="username"
+                  name="username"
                   required
                   autoFocus
                   placeholder="Ej. John Doe"
@@ -56,7 +56,7 @@ export const RegisterPage = ({ setLoggedIn }) => {
                 />
                 <ErrorMessage
                   className="mt-0.5 text-xs text-red-500 line-clamp-1"
-                  name="name"
+                  name="username"
                   component="div"
                 />
               </div>

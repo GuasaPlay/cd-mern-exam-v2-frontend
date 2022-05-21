@@ -13,10 +13,12 @@ import { FormSchemaCard, initialValuesCard } from "schemas/card";
 export const NewProjectPage = () => {
   const { showToast } = useToast();
   const navigate = useNavigate();
-  const { mutate } = useCreteCard();
+  const { mutate, isLoading } = useCreteCard();
   const handleSubmit = (values) => {
-    const time = `${dayjs().hour()}:${dayjs().minute()}:${dayjs().second()}`;
-    const due = dayjs(`${values.due} ${time}`).toISOString();
+    const isValidDate = dayjs(values.due).isValid();
+    if (!isValidDate) showToast("Enter a valid date", "error");
+
+    const due = dayjs(values.due).toISOString();
     const user = JSON.parse(localStorage.getItem("user"));
     const creator = user._id;
     const card = { name: values.name, due, creator };
@@ -63,7 +65,7 @@ export const NewProjectPage = () => {
                       name="name"
                       required
                       autoFocus
-                      placeholder=""
+                      placeholder="Ej. Talk AWS Course"
                       component={Input}
                     />
                     <ErrorMessage
@@ -75,7 +77,7 @@ export const NewProjectPage = () => {
                   <div>
                     <Label htmlFor="due" name="Due Date" isRequired />
                     <Field
-                      type="date"
+                      type="datetime-local"
                       id="due"
                       name="due"
                       required
@@ -89,7 +91,12 @@ export const NewProjectPage = () => {
                     />
                   </div>
                   <div className="">
-                    <Button block type="submit" name="Plan Project" />
+                    <Button
+                      block
+                      type="submit"
+                      name="Plan Project"
+                      loading={isLoading}
+                    />
                   </div>
                 </div>
               </Form>

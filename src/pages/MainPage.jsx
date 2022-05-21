@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export const MainPage = () => {
-  const { data, isSuccess } = useCards();
+  const { data, isSuccess, isLoading } = useCards();
   const [backLogList, setBackLogList] = useState([]);
   const [inProgressList, setInProgressList] = useState([]);
   const [doneList, setDoneList] = useState([]);
@@ -29,6 +29,11 @@ export const MainPage = () => {
 
   return (
     <div>
+      {isLoading && (
+        <div className="mx-auto mt-20 max-w-[1100px] animate-bounce px-2 text-center text-2xl font-semibold text-slate-700">
+          Loading...
+        </div>
+      )}
       {isSuccess && (
         <div className="mx-auto max-w-[1100px] px-2">
           <Board>
