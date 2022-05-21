@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 export const DefaultLayout = () => {
   return (
@@ -9,6 +10,7 @@ export const DefaultLayout = () => {
         </h1>
         <Outlet />
       </div>
+      <ToastContainer />
     </main>
   );
 };

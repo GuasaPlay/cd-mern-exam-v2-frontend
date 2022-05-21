@@ -1,14 +1,35 @@
+import dayjs from "dayjs";
 import { Button } from "components/ui/Button";
 import { Input } from "components/ui/Input";
 import { Label } from "components/ui/Label";
+
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { Link } from "react-router-dom";
+import { useCreteCard } from "hooks/useCard";
+import { useToast } from "hooks/useToast";
+import { Link, useNavigate } from "react-router-dom";
 
 import { FormSchemaCard, initialValuesCard } from "schemas/card";
 
 export const NewProjectPage = () => {
+  const { showToast } = useToast();
+  const navigate = useNavigate();
+  const { mutate } = useCreteCard();
   const handleSubmit = (values) => {
-    console.log(values);
+    const time = `${dayjs().hour()}:${dayjs().minute()}:${dayjs().second()}`;
+    const due = dayjs(`${values.due} ${time}`).toISOString();
+    const user = JSON.parse(localStorage.getItem("user"));
+    const creator = user._id;
+    const card = { name: values.name, due, creator };
+
+    mutate(card, {
+      onSuccess: () => {
+        showToast("Project created successfully", "success");
+        navigate("/");
+      },
+      onError: (error) => {
+        showToast(error.response.data.msg, "error");
+      },
+    });
   };
   return (
     <div className="mx-auto mt-10 max-w-[600px] px-2">
