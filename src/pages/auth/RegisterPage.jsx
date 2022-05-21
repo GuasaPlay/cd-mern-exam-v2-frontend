@@ -1,16 +1,16 @@
-import axios from "axios";
 import { Button } from "components/ui/Button";
 import { Input } from "components/ui/Input";
 import { Label } from "components/ui/Label";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useToast } from "hooks/useToast";
 import { useRegisterUser } from "hooks/useUser";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FormSchemaRegister, initialValuesRegister } from "schemas/register";
 
 export const RegisterPage = ({ setLoggedIn }) => {
+  const navigate = useNavigate();
   const { showToast } = useToast();
-  const { mutate } = useRegisterUser();
+  const { mutate, isLoading } = useRegisterUser();
   const handleSubmit = (values) => {
     const user = {
       name: values.name,
@@ -20,15 +20,10 @@ export const RegisterPage = ({ setLoggedIn }) => {
 
     mutate(user, {
       onSuccess: (data) => {
-        const { accessToken, user } = data;
-
-        axios.defaults.headers.common[
-          "Authorization"
-        ] = `Bearer ${accessToken}`;
-
+        const { accessToken } = data;
         localStorage.setItem("accessToken", accessToken);
-        localStorage.setItem("user", JSON.stringify(user));
-        setLoggedIn(true);
+
+        navigate("/", { replace: true });
       },
       onError: (error) => {
         showToast(error.response.data.msg, "error");
@@ -120,7 +115,12 @@ export const RegisterPage = ({ setLoggedIn }) => {
               </div>
 
               <div className="mt-6 w-full">
-                <Button type="submit" name="Register" block />
+                <Button
+                  type="submit"
+                  name="Register"
+                  loading={isLoading}
+                  block
+                />
                 <Link
                   to="/auth/login"
                   className="mt-2 block text-center text-sm text-slate-600 underline transition-colors hover:text-blue-500"

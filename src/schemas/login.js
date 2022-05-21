@@ -1,8 +1,8 @@
 import * as Yup from "yup";
 
 export const initialValuesLogin = {
-  email: "",
-  password: "",
+  email: "oscar@gmail.com",
+  password: "0106179450",
 };
 
 export const FormSchemaLogin = Yup.object().shape({

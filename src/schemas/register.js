@@ -3,8 +3,8 @@ import * as Yup from "yup";
 export const initialValuesRegister = {
   name: "Oscar Calle",
   email: "oscar@gmail.com",
-  password: "123456",
-  confirmPassword: "123456",
+  password: "0106179450",
+  confirmPassword: "0106179450",
 };
 
 export const FormSchemaRegister = Yup.object().shape({

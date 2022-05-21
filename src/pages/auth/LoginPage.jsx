@@ -3,14 +3,31 @@ import { Input } from "components/ui/Input";
 import { Label } from "components/ui/Label";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useToast } from "hooks/useToast";
-import { Link } from "react-router-dom";
+import { useLoginUser } from "hooks/useUser";
+import { Link, useNavigate } from "react-router-dom";
 import { FormSchemaLogin, initialValuesLogin } from "schemas/login";
 
 export const LoginPage = () => {
+  const navigate = useNavigate();
   const { showToast } = useToast();
+  const { mutate } = useLoginUser();
+
   const handleSubmit = (values) => {
-    console.log(values);
-    showToast("Login Successful", "success");
+    const user = {
+      email: values.email,
+      password: values.password,
+    };
+
+    mutate(user, {
+      onSuccess: (data) => {
+        const { accessToken } = data;
+        localStorage.setItem("accessToken", accessToken);
+        navigate("/", { replace: true });
+      },
+      onError: (error) => {
+        showToast(error.response.data.msg, "error");
+      },
+    });
   };
 
   return (

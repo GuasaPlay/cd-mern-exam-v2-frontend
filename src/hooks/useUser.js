@@ -1,18 +1,19 @@
-import { registerUser } from "api/queries/user";
-import { useMutation } from "react-query";
+import { getUser, loginUser, registerUser } from "api/queries/user";
+import { useMutation, useQuery } from "react-query";
 
-// const key = "user";
+const key = "user";
 
 export const useRegisterUser = () => {
   return useMutation(registerUser);
 };
 
-// export const useEmployees = ({ search = "", page = 1, role, sort }) => {
-//   const school = useSelector((state) => state.auth.school);
+export const useLoginUser = () => {
+  return useMutation(loginUser);
+};
 
-//   const params = { ...sort, search: search, page, role, school: school._id };
-
-//   return useQuery([key, { page, role }], () => getEmployees(params), {
-//     refetchOnWindowFocus: false,
-//   });
-// };
+export const useGetUser = () => {
+  return useQuery([key], () => getUser(), {
+    refetchOnWindowFocus: false,
+    retry: false,
+  });
+};
