@@ -22,7 +22,6 @@ export const RegisterPage = ({ setLoggedIn }) => {
       onSuccess: (data) => {
         const { accessToken } = data;
         localStorage.setItem("accessToken", accessToken);
-
         navigate("/", { replace: true });
       },
       onError: (error) => {
