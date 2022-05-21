@@ -7,11 +7,8 @@ import { Link } from "react-router-dom";
 
 export const MainPage = () => {
   return (
-    <div className="mt-12">
-      <div className="mx-auto max-w-[1000px] px-2">
-        <h1 className="text-center text-4xl font-bold text-slate-700 ">
-          Project Manager
-        </h1>
+    <div>
+      <div className="mx-auto max-w-[1100px] px-2">
         <Board>
           <List>
             <ListTitle title="Backlog" color="sky" />

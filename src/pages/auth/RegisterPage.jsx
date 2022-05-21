@@ -122,7 +122,7 @@ export const RegisterPage = ({ setLoggedIn }) => {
                 />
                 <Link
                   to="/auth/login"
-                  className="mt-2 block text-center text-sm text-slate-600 underline transition-colors hover:text-blue-500"
+                  className="mt-2 block text-center text-sm font-semibold text-slate-600 underline transition-colors hover:text-sky-600"
                 >
                   Already have an account?
                 </Link>

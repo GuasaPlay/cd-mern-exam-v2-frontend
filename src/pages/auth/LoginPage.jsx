@@ -81,7 +81,7 @@ export const LoginPage = () => {
                 <Button type="submit" name="Login" block />
                 <Link
                   to="/auth/register"
-                  className="mt-2 block text-center text-sm text-slate-600 underline transition-colors hover:text-blue-500"
+                  className="mt-2 block text-center text-sm font-semibold text-slate-600 underline transition-colors hover:text-sky-600"
                 >
                   Create an account
                 </Link>

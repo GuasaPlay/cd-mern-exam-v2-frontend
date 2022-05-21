@@ -1,5 +1,5 @@
 const inpuStyle =
-  "flex items-center space-x-2 w-full rounded-md border-2 border-gray-300 px-[9px] py-[7.25px] text-slate-700 transition-colors focus-within:border-sky-500";
+  "flex items-center bg-white space-x-2 w-full rounded-md border-2 border-gray-300 px-[9px] py-[7.25px] text-slate-700 transition-colors focus-within:border-sky-500";
 
 export const Input = ({ field, form, ...props }) => {
   return (

@@ -1,5 +1,5 @@
 const buttonColor = {
-  primary: "bg-blue-600",
+  primary: "bg-sky-600",
   delete: "bg-red-600",
 };
 

@@ -6,6 +6,7 @@ import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 import { RegisterPage } from "pages/auth/RegisterPage";
 import { useEffect, useState } from "react";
+import { NewProjectPage } from "pages/projects/NewProjectPage";
 
 export const RouterApp = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -24,6 +25,7 @@ export const RouterApp = () => {
         </Route>
         <Route path="/" element={<PrivateRoute />}>
           <Route index element={<MainPage />} />
+          <Route path="projects/new" element={<NewProjectPage />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" />} />
