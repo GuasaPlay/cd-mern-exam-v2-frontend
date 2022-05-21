@@ -6,13 +6,23 @@ import { MainPage } from "pages/MainPage";
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 import { RegisterPage } from "pages/auth/RegisterPage";
-
-const loggedIn = false;
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export const RouterApp = () => {
-  // const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  if (false) {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const accessToken = localStorage.getItem("accessToken");
+
+  useEffect(() => {
+    if (!accessToken) return;
+    axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+    setLoggedIn(true);
+  }, [accessToken]);
+
+  if (isLoading) {
     return (
       <div className="flex h-screen w-full flex-col items-center justify-center">
         <ScaleLoader
@@ -22,7 +32,6 @@ export const RouterApp = () => {
           radius={8}
           margin={4}
         />
-        {/* <div className="text-lg font-medium text-slate-700">Cargando...</div> */}
       </div>
     );
   }
@@ -31,7 +40,10 @@ export const RouterApp = () => {
       <Routes>
         <Route path="/auth" element={<PublicRoute loggedIn={!loggedIn} />}>
           <Route path="login" element={<LoginPage />} />
-          <Route path="register" element={<RegisterPage />} />
+          <Route
+            path="register"
+            element={<RegisterPage setLoggedIn={setLoggedIn} />}
+          />
         </Route>
         <Route path="/" element={<PrivateRoute loggedIn={loggedIn} />}>
           <Route index element={<MainPage />} />

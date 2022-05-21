@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Button } from "components/ui/Button";
 import { Input } from "components/ui/Input";
 import { Label } from "components/ui/Label";
@@ -7,7 +8,7 @@ import { useRegisterUser } from "hooks/useUser";
 import { Link } from "react-router-dom";
 import { FormSchemaRegister, initialValuesRegister } from "schemas/register";
 
-export const RegisterPage = () => {
+export const RegisterPage = ({ setLoggedIn }) => {
   const { showToast } = useToast();
   const { mutate } = useRegisterUser();
   const handleSubmit = (values) => {
@@ -18,6 +19,17 @@ export const RegisterPage = () => {
     };
 
     mutate(user, {
+      onSuccess: (data) => {
+        const { accessToken, user } = data;
+
+        axios.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${accessToken}`;
+
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("user", JSON.stringify(user));
+        setLoggedIn(true);
+      },
       onError: (error) => {
         showToast(error.response.data.msg, "error");
       },
