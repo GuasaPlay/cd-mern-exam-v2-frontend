@@ -18,7 +18,7 @@ export const DefaultLayout = () => {
           </h1>
           <div className="absolute top-2 left-5">
             <h3 className="text-lg font-semibold text-slate-700">
-              Hola, {user?.username}
+              Hello, {user?.username}
             </h3>
           </div>
           <div className="absolute top-2 right-5">
