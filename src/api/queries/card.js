@@ -4,6 +4,7 @@ export const getCards = async (params) => {
   const { data } = await dojoApi.get("/project/get-cards", { params });
   return data;
 };
+
 export const createCard = async (info) => {
   const { data } = await dojoApi.post("/project/create-card", info);
   return data;

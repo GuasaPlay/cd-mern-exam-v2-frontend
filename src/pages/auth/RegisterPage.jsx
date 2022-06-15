@@ -45,6 +45,7 @@ export const RegisterPage = ({ setLoggedIn }) => {
             <div className="grid grid-cols-1 gap-6">
               <div>
                 <Label htmlFor="username" name="Username" isRequired />
+
                 <Field
                   type="text"
                   id="username"
