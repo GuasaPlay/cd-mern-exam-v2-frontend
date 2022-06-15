@@ -1,10 +1,10 @@
 import * as Yup from "yup";
 
 export const initialValuesRegister = {
-  username: "oscar.calle",
-  email: "oscar@gmail.com",
-  password: "0106179450",
-  confirmPassword: "0106179450",
+  username: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
 };
 
 export const FormSchemaRegister = Yup.object().shape({
